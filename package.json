@@ -1,0 +1,96 @@
+{
+  "name": "vscode-apple-swift-format",
+  "displayName": "apple-swift-format",
+  "description": "Formatting Swift code with apple/swift-format.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vknabel/vscode-apple-swift-format"
+  },
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Valentin Knabel",
+    "email": "dev@vknabel.com",
+    "url": "https://github.com/vknabel"
+  },
+  "publisher": "vknabel",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#FC823F",
+    "theme": "light"
+  },
+  "engines": {
+    "vscode": "^1.26.0"
+  },
+  "categories": [
+    "Formatters",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:swift"
+  ],
+  "keywords": [
+    "swift",
+    "swiftformat",
+    "prettifier",
+    "formatter"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "swift",
+        "aliases": [
+          "Swift"
+        ],
+        "extensions": [
+          "swift"
+        ]
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "apple/swift-format Configuration",
+      "properties": {
+        "apple-swift-format.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether apple/swift-format should actually start up on this project."
+        },
+        "apple-swift-format.onlyEnableOnSwiftPMProjects": {
+          "type": "boolean",
+          "default": false,
+          "description": "Only allows the extension to load up when apple/swift-format is available via Swift PM."
+        },
+        "apple-swift-format.path": {
+          "type": "string",
+          "default": "/usr/local/bin/swift-format",
+          "description": "The location of your globally installed apple/swift-format."
+        },
+        "apple-swift-format.configSearchPaths": {
+          "type": "array",
+          "default": [
+            ".swift-format"
+          ],
+          "description": "Possible paths for a apple/swift-format config. See https://github.com/apple/swift-format#configuration",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install && yarn compile",
+    "compile": "tsc -p ./",
+    "format": "prettier --write ./*.json ./**/*.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.10",
+    "prettier": "^1.15.2",
+    "typescript": "^3.0.1",
+    "vscode": "^1.1.21"
+  },
+  "dependencies": {}
+}
