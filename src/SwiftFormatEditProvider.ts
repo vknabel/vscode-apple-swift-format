@@ -39,16 +39,14 @@ function format(request: {
     const userDefinedParams = userDefinedFormatOptionsForDocument(
       request.document
     );
-    const newContents = childProcess
-      .execFileSync(
-        Current.config.swiftFormatPath(request.document),
-        [...userDefinedParams, ...(request.parameters || [])],
-        {
-          encoding: "utf8",
-          input
-        }
-      )
-      .slice(0, -1);
+    const newContents = childProcess.execFileSync(
+      Current.config.swiftFormatPath(request.document),
+      [...userDefinedParams, ...(request.parameters || [])],
+      {
+        encoding: "utf8",
+        input
+      }
+    );
     return newContents !== request.document.getText(request.range)
       ? [
           vscode.TextEdit.replace(
