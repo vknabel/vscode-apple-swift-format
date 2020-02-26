@@ -3,7 +3,7 @@ import * as childProcess from "child_process";
 import Current from "./Current";
 import { handleFormatError } from "./UserInteraction";
 import { existsSync } from "fs";
-import { join } from "path";
+import { resolve } from "path";
 
 const wholeDocumentRange = new vscode.Range(
   0,
@@ -22,7 +22,7 @@ function userDefinedFormatOptionsForDocument(
     "./";
   const searchPaths = Current.config
     .formatConfigSearchPaths()
-    .map(current => join(rootPath, current));
+    .map(current => resolve(rootPath, current));
   const existingConfig = searchPaths.find(existsSync);
   return existingConfig != null ? ["--configuration", existingConfig] : [];
 }
