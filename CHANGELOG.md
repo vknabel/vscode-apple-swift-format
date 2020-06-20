@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Improved: Error message for syntax errors #2 - [@vknabel](https://github.com/vknabel/)
+
 # 1.0.2
 
 - Fixed: `configSearchPaths` did not support `~` vknabel/vscode-swiftlint#8 - [@vknabel](https://github.com/vknabel/)
