@@ -11,7 +11,8 @@ enum UnknownErrorInteraction {
   reportIssue = "Report issue"
 }
 
-const stdinErrorRegex = /<stdin>(:\d+:\d+: error: [^.]+.)/;
+const stdinIncompatibleSwiftSyntaxErrorRegex = /<stdin>((:\d+:\d+: error)?: SwiftSyntax parser library isn't compatible)/;
+const stdinErrorRegex = /<stdin>((:\d+:\d+: error)?: [^.]+.)/;
 
 export async function handleFormatError(
   error: any,
@@ -37,6 +38,14 @@ export async function handleFormatError(
     await Current.editor.showErrorMessage(
       `apple/swift-format failed. ${error.stderr || ""}`
     );
+  } else if (error.status === 1 && stdinIncompatibleSwiftSyntaxErrorRegex.test(error.message)) {
+    const selection = await Current.editor.showWarningMessage(
+      `apple/swift-format does not fit your Swift version. Do you need to update it?`,
+      'How?'
+    )
+    if (selection == "How?") {
+      await Current.editor.openURL('https://github.com/vknabel/vscode-apple-swift-format#appleswift-format-for-vs-code')
+    }
   } else if (error.status === 1 && stdinErrorRegex.test(error.message)) {
     const execArray = stdinErrorRegex.exec(error.message)!
     Current.editor.showWarningMessage(

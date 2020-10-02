@@ -1,3 +1,7 @@
+# 1.1.1
+
+- Fixed: Error messages for incompatible SwiftSyntax #3 - [@vknabel](https://github.com/vknabel/)
+
 # 1.1.0
 
 - Improved: Error message for syntax errors #2 - [@vknabel](https://github.com/vknabel/)

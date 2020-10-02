@@ -12,18 +12,20 @@ You can [install](https://github.com/apple/swift-format#matching-swift-format-to
 
 ```bash
 # Using Mint
-$ mint install apple/swift-format@swift-5.1-branch
+$ mint install apple/swift-format@swift-5.3-branch
 # Manually
-$ git clone -b swift-5.1-branch https://github.com/apple/swift-format.git
+$ git clone -b swift-5.3-branch https://github.com/apple/swift-format.git
 $ swift build -c release
 ```
+
+> **Note:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.3-branch` for Swift `5.3`.
 
 ### Local Installation
 
 Add the package to your dependencies in `Package.swift`:
 
 ```diff
-// swift-tools-version:4.2
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -35,11 +37,13 @@ let package = Package(
         .package(url: "https://github.com/orta/PackageConfig.git", from: "0.0.1"),
         // Dev deps
         .package(url: "https://github.com/orta/Komondor.git", from: "0.0.1"),
-+        .package(url: "https://github.com/apple/swift-format.git", .branch("swift-5.1-branch")),
++        .package(url: "https://github.com/apple/swift-format.git", .branch("swift-5.3-branch")),
     ],
     targets: [...]
 )
 ```
+
+> **Note:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.3-branch` for Swift `5.3`.
 
 ## Configuration
 
