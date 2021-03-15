@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/vknabel/vscode-apple-swift-format"
   },
-  "version": "1.1.1",
+  "version": "1.1.2",
   "license": "MIT",
   "author": {
     "name": "Valentin Knabel",
@@ -66,7 +66,8 @@
         "apple-swift-format.path": {
           "type": "string",
           "default": "/usr/local/bin/swift-format",
-          "description": "The location of your globally installed apple/swift-format."
+          "description": "The location of your globally installed apple/swift-format.",
+          "scope": "machine"
         },
         "apple-swift-format.configSearchPaths": {
           "type": "array",
