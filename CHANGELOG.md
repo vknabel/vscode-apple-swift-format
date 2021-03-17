@@ -1,6 +1,6 @@
 # 1.1.2
 
-Fixes vulnerability which allowed malicous workspaces to execute code when opened by providing. Now the vulnerable configs cannot be overrided in workspaces anymore: `apple-swift-format.path`.
+Fixes vulnerability which allowed malicous workspaces to execute code when opened by providing. Now the vulnerable configs cannot be overrided in workspaces anymore: `apple-swift-format.path`. Reported by [@Ry0taK](https://github.com/Ry0taK).
 
 # 1.1.1
 
