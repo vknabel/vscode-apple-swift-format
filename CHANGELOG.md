@@ -1,3 +1,7 @@
+# 1.1.3
+
+- Explicitly handle EPIPE errors #8 - [@vknabel](https://github.com/vknabel/)
+
 # 1.1.2
 
 [CVE-2021-28789](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28789): Fixes vulnerability which allowed malicous workspaces to execute code when opened by providing. Now the vulnerable configs cannot be overrided in workspaces anymore: `apple-swift-format.path`. Reported by [@Ry0taK](https://github.com/Ry0taK).
