@@ -4,14 +4,15 @@ import Current from "./Current";
 
 enum FormatErrorInteraction {
   configure = "Configure",
-  reset = "Reset"
+  reset = "Reset",
 }
 
 enum UnknownErrorInteraction {
-  reportIssue = "Report issue"
+  reportIssue = "Report issue",
 }
 
-const stdinIncompatibleSwiftSyntaxErrorRegex = /<stdin>((:\d+:\d+: error)?: SwiftSyntax parser library isn't compatible)/;
+const stdinIncompatibleSwiftSyntaxErrorRegex =
+  /<stdin>((:\d+:\d+: error)?: SwiftSyntax parser library isn't compatible)/;
 const stdinErrorRegex = /<stdin>((:\d+:\d+: error)?: [^.]+.)/;
 
 export async function handleFormatError(
@@ -44,10 +45,13 @@ export async function handleFormatError(
     );
   } else if (
     error.status === 1 &&
-    stdinIncompatibleSwiftSyntaxErrorRegex.test(error.message)
+    (stdinIncompatibleSwiftSyntaxErrorRegex.test(error.message) ||
+      ("stderr" in error &&
+        typeof error.stderr === "string" &&
+        error.stderr.includes("_InternalSwiftSyntaxParser")))
   ) {
     const selection = await Current.editor.showWarningMessage(
-      `apple/swift-format does not fit your Swift version. Do you need to update it?`,
+      `apple/swift-format does not fit your Swift version. Do you need to update and recompile it?`,
       "How?"
     );
     if (selection == "How?") {

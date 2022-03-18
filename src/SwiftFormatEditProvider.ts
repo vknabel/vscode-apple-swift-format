@@ -22,7 +22,7 @@ function userDefinedFormatOptionsForDocument(
     "./";
   const searchPaths = Current.config
     .formatConfigSearchPaths()
-    .map(current => resolve(rootPath, current));
+    .map((current) => resolve(rootPath, current));
   const existingConfig = searchPaths.find(existsSync);
   return existingConfig != null ? ["--configuration", existingConfig] : [];
 }
@@ -32,7 +32,7 @@ function format(request: {
   parameters?: string[];
   range?: vscode.Range;
   formatting: vscode.FormattingOptions;
-}) {
+}): vscode.TextEdit[] {
   try {
     const input = request.document.getText(request.range);
     if (input.trim() === "") return [];
@@ -44,7 +44,7 @@ function format(request: {
       [...userDefinedParams, ...(request.parameters || [])],
       {
         encoding: "utf8",
-        input
+        input,
       }
     );
     return newContents !== request.document.getText(request.range)
@@ -52,7 +52,7 @@ function format(request: {
           vscode.TextEdit.replace(
             request.document.validateRange(request.range || wholeDocumentRange),
             newContents
-          )
+          ),
         ]
       : [];
   } catch (error) {
@@ -64,7 +64,8 @@ function format(request: {
 export class SwiftFormatEditProvider
   implements
     vscode.DocumentRangeFormattingEditProvider,
-    vscode.DocumentFormattingEditProvider {
+    vscode.DocumentFormattingEditProvider
+{
   provideDocumentRangeFormattingEdits(
     document: vscode.TextDocument,
     range: vscode.Range,
@@ -74,7 +75,7 @@ export class SwiftFormatEditProvider
       document,
       parameters: [],
       range,
-      formatting
+      formatting,
     });
   }
   provideDocumentFormattingEdits(

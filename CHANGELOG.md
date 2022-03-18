@@ -1,3 +1,7 @@
+# 1.1.4
+
+- Proper error message for \_InternalSwiftSyntaxParser error #9 #13 #14 - [@vknabel](https://github.com/vknabel/)
+
 # 1.1.3
 
 - Explicitly handle EPIPE errors #8 - [@vknabel](https://github.com/vknabel/)
