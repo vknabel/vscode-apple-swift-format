@@ -12,9 +12,10 @@ const wholeDocumentRange = new vscode.Range(
   Number.MAX_SAFE_INTEGER
 );
 
-function userDefinedFormatOptionsForDocument(
-  document: vscode.TextDocument
-): string[] {
+function userDefinedFormatOptionsForDocument(document: vscode.TextDocument): {
+  options: string[];
+  hasConfig: boolean;
+} {
   const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
   const rootPath =
     (workspaceFolder && workspaceFolder.uri.fsPath) ||
@@ -24,7 +25,12 @@ function userDefinedFormatOptionsForDocument(
     .formatConfigSearchPaths()
     .map((current) => resolve(rootPath, current));
   const existingConfig = searchPaths.find(existsSync);
-  return existingConfig != null ? ["--configuration", existingConfig] : [];
+  const options =
+    existingConfig != null ? ["--configuration", existingConfig] : [];
+  return {
+    options,
+    hasConfig: existingConfig != null,
+  };
 }
 
 function format(request: {
@@ -34,14 +40,21 @@ function format(request: {
   formatting: vscode.FormattingOptions;
 }): vscode.TextEdit[] {
   try {
+    const swiftFormatPath = Current.config.swiftFormatPath(request.document);
+    if (swiftFormatPath == null) {
+      return [];
+    }
     const input = request.document.getText(request.range);
     if (input.trim() === "") return [];
     const userDefinedParams = userDefinedFormatOptionsForDocument(
       request.document
     );
+    if (!userDefinedParams.hasConfig && Current.config.onlyEnableWithConfig()) {
+      return [];
+    }
     const newContents = childProcess.execFileSync(
-      Current.config.swiftFormatPath(request.document),
-      [...userDefinedParams, ...(request.parameters || [])],
+      swiftFormatPath,
+      [...userDefinedParams.options, ...(request.parameters || [])],
       {
         encoding: "utf8",
         input,

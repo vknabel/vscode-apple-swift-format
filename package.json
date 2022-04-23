@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/vknabel/vscode-apple-swift-format"
   },
-  "version": "1.1.4",
+  "version": "1.2.0",
   "license": "MIT",
   "author": {
     "name": "Valentin Knabel",
@@ -62,6 +62,11 @@
           "type": "boolean",
           "default": false,
           "description": "Only allows the extension to load up when apple/swift-format is available via Swift PM."
+        },
+        "apple-swift-format.onlyEnableWithConfig": {
+          "type": "boolean",
+          "default": false,
+          "description": "Only use apple/swift-format when a config exists."
         },
         "apple-swift-format.path": {
           "type": "string",

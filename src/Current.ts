@@ -15,8 +15,9 @@ export interface Current {
   };
   config: {
     isEnabled(): boolean;
-
-    swiftFormatPath(document: vscode.TextDocument): string;
+    onlyEnableOnSwiftPMProjects(): boolean;
+    onlyEnableWithConfig(): boolean;
+    swiftFormatPath(document: vscode.TextDocument): string | null;
     resetSwiftFormatPath(): void;
     configureSwiftFormatPath(): void;
     formatConfigSearchPaths(): string[];
@@ -39,8 +40,9 @@ export function prodEnvironment(): Current {
         );
       },
       async reportIssueForError(error) {
-        const title = `Report ${error.code || ""} ${error.message ||
-          ""}`.replace(/\\n/, " ");
+        const title = `Report ${error.code || ""} ${
+          error.message || ""
+        }`.replace(/\\n/, " ");
         const body = "`" + (error.stack || JSON.stringify(error)) + "`";
         await Current.editor.openURL(
           url`https://github.com/vknabel/vscode-apple-swift-format/issues/new?title=${title}&body=${body}`
@@ -56,18 +58,27 @@ export function prodEnvironment(): Current {
       ) =>
         vscode.window.showWarningMessage(message, ...actions) as Thenable<
           T | undefined
-        >
+        >,
     },
     config: {
       isEnabled: () =>
         vscode.workspace
           .getConfiguration()
           .get("apple-swift-format.enable", true),
+      onlyEnableOnSwiftPMProjects: () =>
+        vscode.workspace
+          .getConfiguration()
+          .get("apple-swift-format.onlyEnableOnSwiftPMProjects", false),
+      onlyEnableWithConfig: () =>
+        vscode.workspace
+          .getConfiguration()
+          .get("apple-swift-format.onlyEnableWithConfig", false),
+
       swiftFormatPath: (document: vscode.TextDocument) => {
         // Support running from Swift PM projects
         const possibleLocalPaths = [
           ".build/release/swift-format",
-          ".build/debug/swift-format"
+          ".build/debug/swift-format",
         ];
         for (const path of possibleLocalPaths) {
           // Grab the project root from the local workspace
@@ -80,6 +91,13 @@ export function prodEnvironment(): Current {
           if (existsSync(fullPath)) {
             return absolutePath(fullPath);
           }
+        }
+        if (
+          vscode.workspace
+            .getConfiguration()
+            .get("apple-swift-format.onlyEnableOnSwiftPMProjects", false)
+        ) {
+          return null;
         }
         // Fall back to global defaults found in settings
         return fallbackGlobalSwiftFormatPath();
@@ -94,8 +112,8 @@ export function prodEnvironment(): Current {
         vscode.workspace
           .getConfiguration()
           .get("apple-swift-format.configSearchPaths", [".swift-format"])
-          .map(absolutePath)
-    }
+          .map(absolutePath),
+    },
   };
 }
 

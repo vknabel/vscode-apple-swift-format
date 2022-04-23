@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Added: `apple-swift-format.onlyEnableWithConfig` to only enable SwiftLint with a config [vknabel/vscode-swiftformat#20](https://github.com/vknabel/vscode-swiftformat/issues/20)
+- Fixed: `apple-swift-format.onlyEnableOnSwiftPMProjects` didn't work correctly
+
 # 1.1.4
 
 - Proper error message for \_InternalSwiftSyntaxParser error #9 #13 #14 - [@vknabel](https://github.com/vknabel/)
