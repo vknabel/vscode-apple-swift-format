@@ -1,3 +1,7 @@
+## 1.3.0
+
+- Added: build swift-format if needed #12
+
 ## 1.2.0
 
 - Added: `apple-swift-format.onlyEnableWithConfig` to only enable SwiftLint with a config [vknabel/vscode-swiftformat#20](https://github.com/vknabel/vscode-swiftformat/issues/20)
