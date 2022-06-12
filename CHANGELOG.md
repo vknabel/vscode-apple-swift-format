@@ -1,3 +1,8 @@
+## 1.3.1
+
+- Fixed: correctly display syntax errors #16
+- Fixed: link apple/swift-format binary #12
+
 ## 1.3.0
 
 - Added: build swift-format if needed #12

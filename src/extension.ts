@@ -41,7 +41,7 @@ async function buildSwiftFormatIfNeeded() {
   const buildOperations = manifests.map((manifest) => {
     const manifestPath = manifest.fsPath;
     const manifestDir = path.dirname(manifestPath);
-    return promisify(exec)("swift build --target swift-format -c release", {
+    return promisify(exec)("swift run -c release swift-format --version", {
       cwd: manifestDir,
     });
   });
@@ -49,7 +49,7 @@ async function buildSwiftFormatIfNeeded() {
     await vscode.window.withProgress(
       {
         location: vscode.ProgressLocation.Window,
-        title: "swift build --target swift-format -c release",
+        title: "Prepare apple/swift-format",
       },
       async () => {
         await Promise.all(buildOperations);
