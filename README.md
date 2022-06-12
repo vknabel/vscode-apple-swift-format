@@ -25,7 +25,7 @@ $ swift build -c release
 Add the package to your dependencies in `Package.swift`:
 
 ```diff
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 
 import PackageDescription
 
@@ -37,13 +37,13 @@ let package = Package(
         .package(url: "https://github.com/orta/PackageConfig.git", from: "0.0.1"),
         // Dev deps
         .package(url: "https://github.com/orta/Komondor.git", from: "0.0.1"),
-+        .package(url: "https://github.com/apple/swift-format.git", .branch("swift-5.3-branch")),
++        .package(url: "https://github.com/apple/swift-format.git", .branch("swift-5.6-branch")),
     ],
     targets: [...]
 )
 ```
 
-> **Note:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.3-branch` for Swift `5.3`.
+> **Attention:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.6-branch` for Swift `5.6`. For a complete and up-to-date mapping, see [apple/swift-format#Matching Swift Format to your Swift version](https://github.com/apple/swift-format#matching-swift-format-to-your-swift-version).
 
 ## Configuration
 
