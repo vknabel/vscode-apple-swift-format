@@ -12,13 +12,13 @@ You can [install](https://github.com/apple/swift-format#matching-swift-format-to
 
 ```bash
 # Using Mint
-$ mint install apple/swift-format@swift-5.3-branch
+$ mint install apple/swift-format@release/5.6
 # Manually
 $ git clone -b swift-5.3-branch https://github.com/apple/swift-format.git
 $ swift build -c release
 ```
 
-> **Note:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.3-branch` for Swift `5.3`.
+> **Attention:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.5-branch` for Swift `5.5` and `release/5.6` for `5.6`. For a complete and up-to-date mapping, see [apple/swift-format#Matching Swift Format to your Swift version](https://github.com/apple/swift-format#matching-swift-format-to-your-swift-version).
 
 ### Local Installation
 
@@ -37,13 +37,13 @@ let package = Package(
         .package(url: "https://github.com/orta/PackageConfig.git", from: "0.0.1"),
         // Dev deps
         .package(url: "https://github.com/orta/Komondor.git", from: "0.0.1"),
-+        .package(url: "https://github.com/apple/swift-format.git", .branch("swift-5.6-branch")),
++        .package(url: "https://github.com/apple/swift-format.git", .branch("release/5.6")),
     ],
     targets: [...]
 )
 ```
 
-> **Attention:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.6-branch` for Swift `5.6`. For a complete and up-to-date mapping, see [apple/swift-format#Matching Swift Format to your Swift version](https://github.com/apple/swift-format#matching-swift-format-to-your-swift-version).
+> **Attention:** Pick the same branch name to install `apple/swift-format` as your Swift version! E.g. `swift-5.5-branch` for Swift `5.5` and `release/5.6` for `5.6`. For a complete and up-to-date mapping, see [apple/swift-format#Matching Swift Format to your Swift version](https://github.com/apple/swift-format#matching-swift-format-to-your-swift-version).
 
 ## Configuration
 
