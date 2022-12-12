@@ -53,8 +53,12 @@ function format(request: {
       return [];
     }
     const newContents = childProcess.execFileSync(
-      swiftFormatPath,
-      [...userDefinedParams.options, ...(request.parameters || [])],
+      swiftFormatPath[0],
+      [
+        ...swiftFormatPath.slice(1),
+        ...userDefinedParams.options,
+        ...(request.parameters || []),
+      ],
       {
         encoding: "utf8",
         input,
