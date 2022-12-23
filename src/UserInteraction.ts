@@ -5,6 +5,7 @@ import Current from "./Current";
 enum FormatErrorInteraction {
   configure = "Configure",
   reset = "Reset",
+  howTo = "How?",
 }
 
 enum UnknownErrorInteraction {
@@ -19,13 +20,17 @@ export async function handleFormatError(
   error: any,
   document: vscode.TextDocument
 ) {
-  if (error.code === "ENOENT") {
+  function matches(...codeOrStatus: Array<number | string>) {
+    return codeOrStatus.some((c) => c === error.code || c === error.status);
+  }
+  if (matches("ENOENT", 127)) {
     const selection = await Current.editor.showErrorMessage(
       `Could not find apple/swift-format: ${Current.config.swiftFormatPath(
         document
       )}`,
       FormatErrorInteraction.reset,
-      FormatErrorInteraction.configure
+      FormatErrorInteraction.configure,
+      FormatErrorInteraction.howTo
     );
     switch (selection) {
       case FormatErrorInteraction.reset:
@@ -33,6 +38,11 @@ export async function handleFormatError(
         break;
       case FormatErrorInteraction.configure:
         Current.config.configureSwiftFormatPath();
+        break;
+      case FormatErrorInteraction.howTo:
+        await Current.editor.openURL(
+          "https://github.com/vknabel/vscode-apple-swift-format#global-installation"
+        );
         break;
     }
   } else if (error.code === "EPIPE") {

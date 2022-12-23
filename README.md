@@ -8,11 +8,13 @@ use apple/swift-format installed globally or via the Swift Package Manager.
 
 ### Global Installation
 
-You can [install](https://github.com/apple/swift-format#matching-swift-format-to-your-swift-version) apple/swift-format globally using [Mint](https://github.com/yonaskolb/Mint) or manually.
+You can [install](https://github.com/apple/swift-format#matching-swift-format-to-your-swift-version) apple/swift-format globally using [Homebrew](https://brew.sh), [Mint](https://github.com/yonaskolb/Mint) or manually.
 
 ```bash
 # Using Mint
 $ mint install apple/swift-format@release/5.6
+# Using Homebrew
+$ brew install swift-format
 # Manually
 $ git clone -b swift-5.3-branch https://github.com/apple/swift-format.git
 $ swift build -c release
@@ -47,13 +49,13 @@ let package = Package(
 
 ## Configuration
 
-| Config                                           | Type       | Default             | Description                                                   |
-| ------------------------------------------------ | ---------- | ------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
-| `apple-swift-format.enable`                      | `Bool`     | `true`              | Whether apple/swift-format should actually do something.      |
-| `apple-swift-format.onlyEnableOnSwiftPMProjects` | `Bool`     | `false`             | Requires and uses a apple/swift-format as SwiftPM dependency. |
-| `apple-swift-format.onlyEnableWithConfig`        | `Bool`     | `false`             | Only format if config present.                                |
-| `apple-swift-format.path`                        | `[String]  | String`             | `/usr/local/bin/swift-format`                                 | The location of the globally installed apple/swift-format. |
-| `apple-swift-format.configSearchPaths`           | `[String]` | `[".swift-format"]` | Possible paths for apple/swift-format config.                 |
+| Config                                           | Type                 | Default                       | Description                                                   |
+| ------------------------------------------------ | -------------------- | ----------------------------- | ------------------------------------------------------------- |
+| `apple-swift-format.enable`                      | `Bool`               | `true`                        | Whether apple/swift-format should actually do something.      |
+| `apple-swift-format.onlyEnableOnSwiftPMProjects` | `Bool`               | `false`                       | Requires and uses a apple/swift-format as SwiftPM dependency. |
+| `apple-swift-format.onlyEnableWithConfig`        | `Bool`               | `false`                       | Only format if config present.                                |
+| `apple-swift-format.path`                        | `[String] or String` | `/usr/local/bin/swift-format` | The location of the globally installed apple/swift-format.    |
+| `apple-swift-format.configSearchPaths`           | `[String]`           | `[".swift-format"]`           | Possible paths for apple/swift-format config.                 |
 
 ## Contributors
 

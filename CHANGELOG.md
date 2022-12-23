@@ -1,3 +1,9 @@
+# Changelog
+
+## 1.4.1
+
+- fix: improved error message when apple/swift-format is not installed #19
+
 ## 1.4.0
 
 - Added: `apple-swift-format.path` can now be an array of strings and defaults to `[/usr/bin/env, swift-format]` [vknabel/vscode-apple-swift-format#17](https://github.com/vknabel/vscode-apple-swift-format/issues/17)
