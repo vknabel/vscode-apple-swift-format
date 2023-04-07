@@ -39,7 +39,7 @@ let package = Package(
         .package(url: "https://github.com/orta/PackageConfig.git", from: "0.0.1"),
         // Dev deps
         .package(url: "https://github.com/orta/Komondor.git", from: "0.0.1"),
-+        .package(url: "https://github.com/apple/swift-format.git", .branch("release/5.6")),
++        .package(url: "https://github.com/apple/swift-format.git", branch:("release/5.8")),
     ],
     targets: [...]
 )
