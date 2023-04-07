@@ -12,11 +12,11 @@ You can [install](https://github.com/apple/swift-format#matching-swift-format-to
 
 ```bash
 # Using Mint
-$ mint install apple/swift-format@release/5.6
+$ mint install apple/swift-format@release/5.8
 # Using Homebrew
 $ brew install swift-format
 # Manually
-$ git clone -b swift-5.3-branch https://github.com/apple/swift-format.git
+$ git clone -b release/5.8 https://github.com/apple/swift-format.git
 $ swift build -c release
 ```
 
@@ -27,7 +27,7 @@ $ swift build -c release
 Add the package to your dependencies in `Package.swift`:
 
 ```diff
-// swift-tools-version:5.6
+// swift-tools-version:5.8
 
 import PackageDescription
 
