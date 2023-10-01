@@ -29,6 +29,7 @@ import { url } from "./UrlLiteral";
 import { absolutePath } from "./AbsolutePath";
 import { existsSync } from "fs";
 import { join } from "path";
+import * as os from "os";
 
 export function prodEnvironment(): Current {
   return {
@@ -118,17 +119,24 @@ export function prodEnvironment(): Current {
 }
 
 const fallbackGlobalSwiftFormatPath = (): string[] => {
-  const defaultPath = ["/usr/bin/env", "swift-format"];
-  const path = vscode.workspace
+  var path = vscode.workspace
     .getConfiguration()
-    .get("apple-swift-format.path", defaultPath);
+    .get<string[] | string | null>("apple-swift-format.path", null);
+
   if (typeof path === "string") {
-    return [absolutePath(path)];
-  } else if (Array.isArray(path) && path.length > 0) {
-    return [absolutePath(path[0]), ...path.slice(1)];
-  } else {
-    return defaultPath;
+    return [path];
   }
+  if (!Array.isArray(path) || path.length === 0) {
+    path = [os.platform() === "win32" ? "swift-format.exe" : "swift-format"];
+  }
+
+  if (os.platform() !== "win32" && !path[0].includes("/")) {
+    // Only a binary name, not a path. Search for it in the path (on Windows this is implicit).
+    path = ["/usr/bin/env", ...path];
+  }
+
+  return path;
 };
+
 const Current = prodEnvironment();
 export default Current as Current;

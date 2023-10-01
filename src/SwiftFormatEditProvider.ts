@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
-import * as childProcess from "child_process";
 import Current from "./Current";
 import { handleFormatError } from "./UserInteraction";
 import { existsSync } from "fs";
 import { resolve } from "path";
+import { execShellSync } from "./execShell";
 
 const wholeDocumentRange = new vscode.Range(
   0,
@@ -52,7 +52,7 @@ function format(request: {
     if (!userDefinedParams.hasConfig && Current.config.onlyEnableWithConfig()) {
       return [];
     }
-    const newContents = childProcess.execFileSync(
+    const newContents = execShellSync(
       swiftFormatPath[0],
       [
         ...swiftFormatPath.slice(1),

@@ -21,13 +21,26 @@ export async function handleFormatError(
   document: vscode.TextDocument
 ) {
   function matches(...codeOrStatus: Array<number | string>) {
-    return codeOrStatus.some((c) => c === error.code || c === error.status);
+    return codeOrStatus.some((c) => {
+      if (typeof error.stderr === "string" && error.stderr.includes(c)) {
+        return true;
+      }
+      return c === error.code || c === error.status;
+    });
   }
-  if (matches("ENOENT", 127)) {
+
+  if (matches("Domain=NSCocoaErrorDomain Code=260")) {
+    return;
+  }
+  if (matches("Found a configuration for")) {
+    await Current.editor.showWarningMessage(error.stderr);
+    return;
+  }
+  if (matches("ENOENT", "EACCES", 127)) {
     const selection = await Current.editor.showErrorMessage(
-      `Could not find apple/swift-format: ${Current.config.swiftFormatPath(
-        document
-      )}`,
+      `Could not find apple/swift-format: ${Current.config
+        .swiftFormatPath(document)
+        ?.join(" ")}`,
       FormatErrorInteraction.reset,
       FormatErrorInteraction.configure,
       FormatErrorInteraction.howTo

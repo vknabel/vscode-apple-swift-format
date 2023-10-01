@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.3
+
+- fix: windows support
+
 ## 1.4.1
 
 - fix: improved error message when apple/swift-format is not installed #19
