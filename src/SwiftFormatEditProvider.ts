@@ -81,7 +81,8 @@ function format(request: {
 export class SwiftFormatEditProvider
   implements
     vscode.DocumentRangeFormattingEditProvider,
-    vscode.DocumentFormattingEditProvider
+    vscode.DocumentFormattingEditProvider,
+    vscode.OnTypeFormattingEditProvider
 {
   provideDocumentRangeFormattingEdits(
     document: vscode.TextDocument,
@@ -99,6 +100,18 @@ export class SwiftFormatEditProvider
     document: vscode.TextDocument,
     formatting: vscode.FormattingOptions
   ) {
+    return format({ document, formatting });
+  }
+  provideOnTypeFormattingEdits(
+    document: vscode.TextDocument,
+    position: vscode.Position,
+    ch: string,
+    formatting: vscode.FormattingOptions,
+  ) {
+    // Don't format if user has inserted an empty line
+    if (document.lineAt(position.line).text.trim() === "") {
+      return [];
+    }
     return format({ document, formatting });
   }
 }
