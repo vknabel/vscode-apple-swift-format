@@ -54,7 +54,7 @@ let package = Package(
 | `apple-swift-format.enable`                      | `Bool`     | `true`              | Whether apple/swift-format should actually do something.      |                                                                                                         |
 | `apple-swift-format.onlyEnableOnSwiftPMProjects` | `Bool`     | `false`             | Requires and uses a apple/swift-format as SwiftPM dependency. |                                                                                                         |
 | `apple-swift-format.onlyEnableWithConfig`        | `Bool`     | `false`             | Only format if config present.                                |                                                                                                         |
-| `apple-swift-format.path`                        | `[String]`  | `String`             | `swift-format`                                                | The location of the globally installed SwiftFormat (resolved with the current path if only a filename). |
+| `apple-swift-format.path`                        | `[String] \| String` | platform dependent           | `swift-format`                                                | The location of the globally installed SwiftFormat (resolved with the current path if only a filename). |
 | `apple-swift-format.configSearchPaths`           | `[String]` | `[".swift-format"]` | Possible paths for apple/swift-format config.                 |                                                                                                         |
 
 ## Contributors
