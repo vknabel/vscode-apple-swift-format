@@ -57,9 +57,12 @@ let package = Package(
 | `apple-swift-format.path`                        | `[String] \| String` | platform dependent           | `swift-format`                                                | The location of the globally installed SwiftFormat (resolved with the current path if only a filename). |
 | `apple-swift-format.configSearchPaths`           | `[String]` | `[".swift-format"]` | Possible paths for apple/swift-format config.                 |                                                                                                         |
 
-## Contributors
+## FAQs
 
-- Valentin Knabel, [@vknabel](https://github.com/vknabel), [@vknabel](https://twitter.com/vknabel) on Twitter
+### How do I enable formatting on type?
+
+To enable formatting on while typing code without saving, simply enable the setting `"editor.formatOnType": true`.
+In case you only want to enable it when editing Swift files, you can override as [`[swift]` language specific setting](https://code.visualstudio.com/docs/getstarted/settings#_language-specific-editor-settings).
 
 ## License
 
