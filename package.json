@@ -112,10 +112,12 @@
     "format": "prettier --write ./*.json ./**/*.ts"
   },
   "devDependencies": {
-    "@types/node": "^10.12.10",
-    "@types/vscode": "^1.26.0",
-    "prettier": "^2.4.1",
-    "typescript": "^4.0.0"
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "glob": "^10.3.4"
+  }
 }
