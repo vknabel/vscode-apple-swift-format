@@ -35,6 +35,9 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 async function buildSwiftFormatIfNeeded() {
+  if (!Current.config.onlyEnableOnSwiftPMProjects()) {
+    return;
+  }
   const manifests = await vscode.workspace.findFiles(
     "**/Package.swift",
     "**/.build/**",
