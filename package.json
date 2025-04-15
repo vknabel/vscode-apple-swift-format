@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/vknabel/vscode-apple-swift-format"
   },
-  "version": "1.4.3",
+  "version": "1.5.0",
   "license": "MIT",
   "author": {
     "name": "Valentin Knabel",
